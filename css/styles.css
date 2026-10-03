@@ -1,0 +1,1352 @@
+/* ==========================================================================
+   AyurMedica - BAMS Student Learning Platform Styles
+   Herbal Parchment & Modern Medical Aesthetic
+   ========================================================================== */
+
+:root {
+  --primary-deep: #133a27;
+  --primary-base: #1b4332;
+  --primary-light: #2d6a4f;
+  --primary-accent: #52b788;
+  --primary-subtle: #d8f3dc;
+
+  --ayur-gold: #c59b27;
+  --ayur-ochre: #b58321;
+  --ayur-amber: #d4a373;
+  --ayur-copper: #c75a2a;
+
+  --bg-parchment: #f9f6f0;
+  --bg-card: #ffffff;
+  --bg-sidebar: #f2eee3;
+  --border-parchment: #e8e2d4;
+
+  --text-main: #1c2621;
+  --text-muted: #57655d;
+  --text-on-dark: #f8fafc;
+
+  --shadow-sm: 0 1px 2px 0 rgba(19, 58, 39, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(19, 58, 39, 0.08), 0 2px 4px -1px rgba(19, 58, 39, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(19, 58, 39, 0.1), 0 4px 6px -2px rgba(19, 58, 39, 0.05);
+
+  --font-serif: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sanskrit: 'Noto Serif Devanagari', 'Siddhanta', serif;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-parchment: #0e1512;
+  --bg-card: #151f1a;
+  --bg-sidebar: #121a16;
+  --border-parchment: #25332b;
+  --text-main: #e2ebe5;
+  --text-muted: #94a39b;
+  --primary-subtle: #193325;
+  --primary-base: #2d6a4f;
+  --primary-light: #40916c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-parchment);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, .font-serif-ayur {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+.sanskrit-text {
+  font-family: var(--font-sanskrit);
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: var(--primary-deep);
+  font-weight: 500;
+}
+
+body.dark-mode .sanskrit-text {
+  color: #74c69d;
+}
+
+/* App Header & Navigation */
+.navbar-blur {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-parchment);
+}
+
+body.dark-mode .navbar-blur {
+  background: rgba(21, 31, 26, 0.85);
+  border-bottom: 1px solid var(--border-parchment);
+}
+
+/* Year Selector Badges */
+.year-pill {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.year-pill.active {
+  background-color: var(--primary-base);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(27, 67, 50, 0.25);
+  transform: translateY(-1px);
+}
+
+body.dark-mode .year-pill.active {
+  background-color: var(--primary-light);
+  color: #ffffff;
+}
+
+/* Navigation Tabs */
+.nav-tab-btn {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-tab-btn.active {
+  color: var(--primary-base);
+  font-weight: 600;
+}
+
+body.dark-mode .nav-tab-btn.active {
+  color: #74c69d;
+}
+
+.nav-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ayur-gold);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Flashcard 3D Perspective & Flip */
+.flip-card-container {
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Viva Voce Toggle Card */
+.viva-box {
+  transition: all 0.25s ease;
+  border-left: 4px solid var(--ayur-gold);
+}
+
+.viva-box:hover {
+  border-left-color: var(--primary-base);
+  box-shadow: var(--shadow-md);
+}
+
+.viva-answer-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1), opacity 0.3s ease, padding 0.3s ease;
+}
+
+.viva-answer-content.revealed {
+  max-height: 500px;
+  opacity: 1;
+  padding-top: 0.75rem;
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease;
+}
+
+/* Video Player Simulation Frame */
+.video-frame-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.video-scrub-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.video-scrub-progress {
+  height: 100%;
+  background: var(--ayur-gold);
+  border-radius: 3px;
+  position: relative;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print, header, nav, footer, .btn-print, .search-bar-wrap {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .bg-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+  }
+
+  .viva-answer-content {
+    max-height: none !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+}
+
+/* Custom Scrollbar for Smooth Reading */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-parchment);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ayur-gold);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+
+/* =========================================================
+   AYURMEDICA - PREMIUM PYQ VIEWER
+   ========================================================= */
+
+:root {
+    --pyq-primary: #315c4c;
+    --pyq-primary-dark: #24483b;
+    --pyq-secondary: #8b6f47;
+    --pyq-accent: #c49a5a;
+
+    --pyq-bg: #f6f4ee;
+    --pyq-card: #ffffff;
+    --pyq-soft: #eef3ef;
+    --pyq-border: #e2e5df;
+
+    --pyq-text: #26342e;
+    --pyq-muted: #718078;
+
+    --pyq-shadow:
+        0 8px 30px rgba(38, 52, 46, 0.08);
+
+    --pyq-radius: 16px;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.pyq-viewer {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 26px;
+
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+
+    padding: 24px;
+    box-sizing: border-box;
+
+    background: var(--pyq-bg);
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: var(--pyq-text);
+}
+
+
+/* =========================================================
+   FOLDER SIDEBAR
+   ========================================================= */
+
+.pyq-folder-tree {
+    background: rgba(255, 255, 255, 0.92);
+
+    border: 1px solid var(--pyq-border);
+    border-radius: 20px;
+
+    padding: 18px 12px;
+
+    height: fit-content;
+
+    box-shadow: var(--pyq-shadow);
+
+    position: sticky;
+    top: 20px;
+}
+
+
+.pyq-folder-title {
+    font-size: 18px;
+    font-weight: 750;
+
+    color: var(--pyq-primary);
+
+    padding: 10px 12px 18px;
+
+    border-bottom: 1px solid var(--pyq-border);
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   YEAR FOLDERS
+   ========================================================= */
+
+.pyq-folder-btn,
+.pyq-subject-folder-btn {
+    width: 100%;
+
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 11px 12px;
+
+    border-radius: 11px;
+
+    color: var(--pyq-text);
+
+    font-size: 14px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.pyq-folder-btn:hover,
+.pyq-subject-folder-btn:hover {
+    background: var(--pyq-soft);
+    color: var(--pyq-primary);
+}
+
+
+.pyq-folder-btn:active,
+.pyq-subject-folder-btn:active {
+    transform: scale(0.98);
+}
+
+
+.pyq-folder-arrow {
+    margin-left: auto;
+
+    font-size: 18px;
+
+    color: var(--pyq-muted);
+
+    transition: transform 0.2s ease;
+}
+
+
+/* =========================================================
+   FOLDER CHILDREN
+   ========================================================= */
+
+.pyq-folder-children {
+    padding-left: 12px;
+}
+
+
+.pyq-folder-subject {
+    margin-top: 3px;
+}
+
+
+.pyq-subject-folder-btn {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.pyq-folder-chapters {
+    padding-left: 20px;
+}
+
+
+.pyq-chapter-folder-btn {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border: none;
+    background: transparent;
+
+    padding: 9px 10px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    color: var(--pyq-muted);
+
+    font-size: 12.5px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.pyq-chapter-folder-btn:hover {
+    background: #f1f4f0;
+    color: var(--pyq-primary);
+}
+
+
+.pyq-chapter-folder-btn small {
+    margin-left: auto;
+
+    min-width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #edf1ed;
+
+    color: var(--pyq-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.pyq-main-content {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+   ========================================================= */
+
+.pyq-page-heading {
+    margin-bottom: 22px;
+
+    padding: 28px 30px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #315c4c 0%,
+            #3e705d 55%,
+            #537d68 100%
+        );
+
+    color: white;
+
+    box-shadow:
+        0 12px 35px rgba(49, 92, 76, 0.20);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.pyq-page-heading::after {
+    content: "🪷";
+
+    position: absolute;
+
+    right: 35px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 72px;
+
+    opacity: 0.13;
+}
+
+
+.pyq-page-heading h2 {
+    margin: 0 0 7px;
+
+    font-size: 27px;
+    font-weight: 750;
+
+    letter-spacing: -0.4px;
+}
+
+
+.pyq-page-heading p {
+    margin: 0;
+
+    font-size: 14px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   FILTER PANEL
+   ========================================================= */
+
+.pyq-filter-panel {
+    background: var(--pyq-card);
+
+    border: 1px solid var(--pyq-border);
+
+    border-radius: var(--pyq-radius);
+
+    padding: 18px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(38, 52, 46, 0.05);
+}
+
+
+.pyq-filter-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+.pyq-filter-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.pyq-filter-group label {
+    font-size: 11px;
+
+    font-weight: 750;
+
+    color: var(--pyq-muted);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+.pyq-filter-select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid var(--pyq-border);
+
+    background: #fafbf9;
+
+    color: var(--pyq-text);
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.pyq-filter-select:focus {
+    border-color: var(--pyq-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(49, 92, 76, 0.10);
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.pyq-search-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 15px;
+}
+
+
+.pyq-search-box {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--pyq-border);
+
+    background: #fafbf9;
+
+    border-radius: 11px;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.pyq-search-box:focus-within {
+    border-color: var(--pyq-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(49, 92, 76, 0.08);
+}
+
+
+.pyq-search-icon {
+    font-size: 16px;
+}
+
+
+.pyq-search-box input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    padding: 12px 4px;
+
+    font-size: 14px;
+
+    color: var(--pyq-text);
+}
+
+
+.pyq-search-box input::placeholder {
+    color: #9ba69f;
+}
+
+
+/* =========================================================
+   MARKS BUTTONS
+   ========================================================= */
+
+.pyq-marks-buttons {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+
+.pyq-mark-btn {
+    border: 1px solid var(--pyq-border);
+
+    background: white;
+
+    color: var(--pyq-muted);
+
+    border-radius: 9px;
+
+    padding: 9px 13px;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.pyq-mark-btn:hover {
+    border-color: var(--pyq-primary);
+
+    color: var(--pyq-primary);
+}
+
+
+.pyq-mark-btn.active {
+    background: var(--pyq-primary);
+
+    color: white;
+
+    border-color: var(--pyq-primary);
+
+    box-shadow:
+        0 4px 12px rgba(49, 92, 76, 0.20);
+}
+
+
+/* =========================================================
+   RESULTS HEADER
+   ========================================================= */
+
+.pyq-results-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 15px 3px;
+
+    color: var(--pyq-muted);
+
+    font-size: 13px;
+}
+
+
+.pyq-results-header strong {
+    color: var(--pyq-primary);
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   QUESTION CARD
+   ========================================================= */
+
+.pyq-card {
+    background: var(--pyq-card);
+
+    border: 1px solid var(--pyq-border);
+
+    border-radius: 18px;
+
+    padding: 23px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 6px 25px rgba(38, 52, 46, 0.055);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border 0.2s ease;
+}
+
+
+.pyq-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d4ddd7;
+
+    box-shadow:
+        0 12px 35px rgba(38, 52, 46, 0.09);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.pyq-card-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+}
+
+
+.pyq-card-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+
+.pyq-marks-badge,
+.pyq-type-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    font-weight: 750;
+}
+
+
+.pyq-marks-badge {
+    background: #edf5f0;
+
+    color: var(--pyq-primary);
+}
+
+
+.pyq-type-badge {
+    background: #f5f1e9;
+
+    color: var(--pyq-secondary);
+}
+
+
+/* =========================================================
+   COPY BUTTON
+   ========================================================= */
+
+.pyq-copy-btn {
+    border: 1px solid var(--pyq-border);
+
+    background: white;
+
+    color: var(--pyq-primary);
+
+    padding: 8px 12px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.pyq-copy-btn:hover {
+    background: var(--pyq-primary);
+
+    color: white;
+
+    border-color: var(--pyq-primary);
+}
+
+
+/* =========================================================
+   QUESTION INFO
+   ========================================================= */
+
+.pyq-card-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+
+.pyq-card-info span {
+    padding: 5px 9px;
+
+    border-radius: 7px;
+
+    background: #f5f6f3;
+
+    color: var(--pyq-muted);
+
+    font-size: 10.5px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   QUESTION
+   ========================================================= */
+
+.pyq-question {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 18px;
+
+    line-height: 1.55;
+
+    color: #27352f;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   ANSWER
+   ========================================================= */
+
+.pyq-answer {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #f7f9f6;
+
+    border: 1px solid #e5ebe6;
+
+    border-radius: 13px;
+}
+
+
+.pyq-answer-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--pyq-primary);
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    margin-bottom: 14px;
+}
+
+
+.pyq-answer-title::before {
+    content: "✓";
+
+    width: 21px;
+    height: 21px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--pyq-primary);
+
+    color: white;
+
+    font-size: 11px;
+}
+
+
+.pyq-answer-section {
+    margin-bottom: 15px;
+}
+
+
+.pyq-answer-section:last-child {
+    margin-bottom: 0;
+}
+
+
+.pyq-answer-section h4 {
+    margin: 0 0 5px;
+
+    color: var(--pyq-secondary);
+
+    font-size: 13px;
+
+    font-weight: 750;
+}
+
+
+.pyq-answer-section p {
+    margin: 0;
+
+    color: #4c5a53;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   EXAM TIP
+   ========================================================= */
+
+.pyq-exam-tip {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+    padding: 12px 14px;
+
+    background: #fbf6ea;
+
+    border: 1px solid #eee2c8;
+
+    border-radius: 10px;
+
+    color: #695638;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+
+.pyq-exam-tip strong {
+    white-space: nowrap;
+
+    color: #896d3e;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.pyq-empty-state {
+    background: white;
+
+    border: 1px dashed #d5ddd7;
+
+    border-radius: 17px;
+
+    padding: 55px 25px;
+
+    text-align: center;
+
+    color: var(--pyq-muted);
+}
+
+
+.pyq-empty-icon {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+}
+
+
+.pyq-empty-state h3 {
+    margin: 0 0 7px;
+
+    color: var(--pyq-text);
+
+    font-size: 18px;
+}
+
+
+.pyq-empty-state p {
+    margin: 0 auto 18px;
+
+    max-width: 450px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+.pyq-reset-btn {
+    border: none;
+
+    background: var(--pyq-primary);
+
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .pyq-viewer {
+        grid-template-columns: 1fr;
+    }
+
+    .pyq-folder-tree {
+        position: static;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .pyq-viewer {
+        padding: 12px;
+
+        gap: 15px;
+    }
+
+    .pyq-filter-row {
+        grid-template-columns: 1fr;
+    }
+
+    .pyq-search-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pyq-marks-buttons {
+        justify-content: flex-start;
+    }
+
+    .pyq-card {
+        padding: 17px;
+    }
+
+    .pyq-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pyq-page-heading {
+        padding: 22px;
+    }
+
+    .pyq-page-heading h2 {
+        font-size: 22px;
+    }
+
+}
+
+/* =========================================================
+   ANSWER LISTS / OBJECTS
+   ========================================================= */
+
+.pyq-answer-list {
+    margin: 7px 0 0 18px;
+
+    padding-left: 15px;
+
+    color: #4c5a53;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.pyq-answer-list li {
+    margin-bottom: 5px;
+}
+
+
+.pyq-answer-object {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.pyq-answer-object-row {
+    display: grid;
+
+    grid-template-columns: 150px 1fr;
+
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid #e8ece8;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+.pyq-answer-object-row:last-child {
+    border-bottom: none;
+}
+
+
+.pyq-answer-object-row strong {
+    color: var(--pyq-secondary);
+}
+
+
+.pyq-answer-content {
+    color: #4c5a53;
+}
+
+
+@media (max-width: 600px) {
+
+    .pyq-answer-object-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+
+}
+
+/* ==========================================================================
+   AYURMEDICA - FOLDER TREE & MOBILE DRAWER STYLES
+   ========================================================================== */
+
+.summary-folder-tree,
+.fc-folder-tree {
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+  position: sticky;
+  top: 100px;
+}
+
+.summary-folder-tree::-webkit-scrollbar,
+.fc-folder-tree::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  display: none;
+}
+
+.summary-folder-tree,
+.fc-folder-tree,
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Card hover and scale effects */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* Mobile responsive drawer overlay rules */
+@media (max-width: 1023px) {
+  #sum-sidebar-col,
+  #fc-sidebar-col {
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-folder-tree,
+  .fc-folder-tree {
+    position: static;
+    max-height: 420px;
+  }
+}

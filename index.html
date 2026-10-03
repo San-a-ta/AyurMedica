@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AyurMedica | BAMS Student Learning Platform (AYUSH & NCISM Aligned)</title>
+  <meta name="description" content="Comprehensive student-friendly platform for BAMS: Practicals with procedures and viva answers, previous year questions (PYQs) with model answers, NCISM syllabus, live video demos, and easy subject summaries.">
+
+  <!-- Google Fonts: Cinzel for Classical Headers, Inter for Body, Noto Serif Devanagari for Sanskrit Shlokas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ayurgreen: {
+              50: '#f0f9f4',
+              100: '#d8f3dc',
+              500: '#52b788',
+              700: '#2d6a4f',
+              800: '#1b4332',
+              900: '#133a27'
+            },
+            ayurgold: {
+              400: '#e5b84c',
+              500: '#c59b27',
+              600: '#b58321'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom App Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="antialiased">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-[#133a27] text-[#d8f3dc] text-xs py-1.5 px-4 text-center border-b border-[#2d6a4f]/50 flex items-center justify-between no-print">
+    <div class="hidden sm:block text-[11px] opacity-80 font-mono">
+      आयुर्वेदोऽमृतानाम् • Ministry of AYUSH & NCISM Standardized
+    </div>
+    <div class="mx-auto sm:mx-0 font-medium">
+      🌿 All 4 Professional Years Curriculum • Practicals with Viva Voce • High-Scoring PYQ Bank
+    </div>
+    <div class="hidden md:flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      <span class="text-[11px] text-emerald-300">Exam Ready 2024-25</span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="navbar-blur sticky top-0 z-40 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo & Branding -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.App.switchTab('practicals')">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#1b4332] to-[#2d6a4f] text-[#c59b27] flex items-center justify-center shadow-md ring-2 ring-[#c59b27]/30">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-2xl font-bold font-serif-ayur tracking-tight text-[#133a27] dark:text-[#74c69d]">
+                AyurMedica
+              </h1>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#c59b27] text-white uppercase tracking-wider">
+                BAMS Pro
+              </span>
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 -mt-0.5">
+              Digital Medical Companion for Ayurvedic Scholars
+            </p>
+          </div>
+        </div>
+
+        <!-- Global Search Bar -->
+        <div class="flex-1 max-w-md hidden md:block no-print">
+          <div class="relative">
+            <input type="text" id="global-search-input" placeholder="Search practicals, PYQs, shlokas, subjects (e.g. Vamana, Amavata, Hingula)..." class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#e8e2d4] dark:border-[#25332b] bg-[#fdfbf7] dark:bg-[#151f1a] text-xs text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1b4332] dark:focus:ring-[#52b788] shadow-inner transition-all">
+            <svg class="w-4 h-4 absolute left-3 top-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <button id="btn-clear-search" class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" title="Clear Search">
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Utility Action Controls -->
+        <div class="flex items-center gap-2 no-print">
+          <!-- Print Page Button -->
+          <button id="btn-print-page" class="p-2.5 rounded-xl border border-[#e8e2d4] dark:border-[#25332b] bg-white dark:bg-[#151f1a] text-gray-600 dark:text-gray-300 hover:text-[#1b4332] hover:bg-[#faf8f5] transition-colors" title="Print Current View or Save PDF">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button id="btn-theme-toggle" class="p-2.5 rounded-xl border border-[#e8e2d4] dark:border-[#25332b] bg-white dark:bg-[#151f1a] text-gray-600 dark:text-gray-300 hover:text-[#c59b27] hover:bg-[#faf8f5] transition-colors" title="Toggle Dark / Light Theme">
+            <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </button>
+
+          <!-- Mobile Hamburger Menu Button -->
+          <button id="btn-mobile-menu" class="p-2.5 rounded-xl border border-[#e8e2d4] dark:border-[#25332b] md:hidden text-gray-600 dark:text-gray-300">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Academic Year Filter Pill Bar -->
+      <div class="py-3 border-t border-[#e8e2d4]/70 dark:border-[#25332b] flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mr-1 whitespace-nowrap">
+            Academic Year:
+          </span>
+          <button class="year-pill px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#e8e2d4] dark:border-[#25332b] whitespace-nowrap" data-year="All">
+            🌟 All Years
+          </button>
+          <button class="year-pill px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#e8e2d4] dark:border-[#25332b] whitespace-nowrap" data-year="1st Prof">
+            🌿 1st Prof (Pre-Clinical)
+          </button>
+          <button class="year-pill px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#e8e2d4] dark:border-[#25332b] whitespace-nowrap" data-year="2nd Prof">
+            🧪 2nd Prof (Para-Clinical)
+          </button>
+          <button class="year-pill px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#e8e2d4] dark:border-[#25332b] whitespace-nowrap" data-year="3rd Prof">
+            ⚕️ 3rd Prof (Specialties)
+          </button>
+          <button class="year-pill px-3.5 py-1.5 rounded-xl text-xs font-bold border border-[#e8e2d4] dark:border-[#25332b] whitespace-nowrap" data-year="4th Prof">
+            🏥 4th / Final Prof (Clinics & Surgery)
+          </button>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+          <span class="font-medium">Active Scope:</span>
+          <span id="active-year-label" class="font-bold text-[#1b4332] dark:text-[#74c69d]">All Professional Years</span>
+        </div>
+      </div>
+
+      <!-- Feature Tabs Navigation (Desktop) -->
+      <nav class="hidden md:flex space-x-1 lg:space-x-4 border-t border-[#e8e2d4] dark:border-[#25332b] overflow-x-auto no-print">
+        <button class="nav-tab-btn active py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="practicals">
+          <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+          Practicals & Viva Lab
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="demos">
+          <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+          🤖 AI Practical Simulator
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="pyqs">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          PYQ Bank & Model Answers
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="summaries">
+          <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          Easy Subject Summaries
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="syllabus">
+          <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+          📚 Syllabus, Marks & Books
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="flashcards">
+          <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          Shloka Flashcards
+        </button>
+        <button class="nav-tab-btn py-3.5 px-3 text-xs font-semibold whitespace-nowrap text-gray-600 dark:text-gray-300 hover:text-[#1b4332] flex items-center gap-1.5" data-tab="dictionary">
+          <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Shabdakosha (Glossary)
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-nav-drawer" class="hidden md:hidden bg-white dark:bg-[#151f1a] border-t border-[#e8e2d4] dark:border-[#25332b] px-4 py-3 space-y-1 shadow-lg no-print">
+      <div class="mb-3">
+        <input type="text" id="mobile-search-input" placeholder="Search resources..." class="w-full px-3 py-2 text-xs rounded-lg border border-[#e8e2d4] dark:border-[#25332b] bg-gray-50 dark:bg-[#18241e]">
+      </div>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="practicals">🧪 Practicals & Viva Lab</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="demos">🤖 AI Practical Simulator</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="pyqs">📝 PYQ Bank & Model Answers</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="summaries">📖 Easy Subject Summaries</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="syllabus">📚 Syllabus, Marks & Books</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="flashcards">🎴 Shloka Flashcards</button>
+      <button class="nav-tab-btn w-full text-left py-2 px-3 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-[#faf8f5] rounded-lg" data-tab="dictionary">🔍 Shabdakosha (Glossary)</button>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="main-content-area" class="min-h-[70vh]">
+      <!-- Dynamically Populated by Components via app.js -->
+    </div>
+  </main>
+
+  <!-- Platform Footer -->
+  <footer class="mt-16 bg-[#133a27] text-white py-12 border-t border-[#2d6a4f] no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-[#c59b27] text-[#133a27] font-bold flex items-center justify-center font-serif">
+              A
+            </div>
+            <span class="text-lg font-bold font-serif-ayur">AyurMedica</span>
+          </div>
+          <p class="text-xs text-emerald-200/80 leading-relaxed">
+            The dedicated academic learning portal for Bachelor of Ayurvedic Medicine & Surgery (BAMS) students, interns, and postgraduate aspirants.
+          </p>
+          <div class="text-[11px] text-[#c59b27] font-mono">
+            Aligned with NCISM (AYUSH) New Guidelines
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#52b788] mb-3">Academic Years</h4>
+          <ul class="space-y-1.5 text-xs text-emerald-100">
+            <li><a href="javascript:void(0)" onclick="window.App.setYear('1st Prof')" class="hover:text-white">1st Professional BAMS</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.setYear('2nd Prof')" class="hover:text-white">2nd Professional BAMS</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.setYear('3rd Prof')" class="hover:text-white">3rd Professional BAMS</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.setYear('4th Prof')" class="hover:text-white">4th / Final Professional BAMS</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#52b788] mb-3">Study Utilities</h4>
+          <ul class="space-y-1.5 text-xs text-emerald-100">
+            <li><a href="javascript:void(0)" onclick="window.App.switchTab('practicals')" class="hover:text-white">Practical Step Checklists</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.switchTab('pyqs')" class="hover:text-white">10M & 5M Model Answers</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.switchTab('flashcards')" class="hover:text-white">Shloka Memorizer Flashcards</a></li>
+            <li><a href="javascript:void(0)" onclick="window.App.switchTab('dictionary')" class="hover:text-white">Ayurvedic Medical Shabdakosha</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-[#52b788] mb-3">Study Advice & Ethics</h4>
+          <p class="text-xs text-emerald-200/70 leading-relaxed">
+            "शास्त्रं ज्योतिः प्रकाशार्थं दर्शनं बुद्धिरात्मनः" — Classical texts serve as a torch of light; the physician's own critical discernment illuminates the patient's cure.
+          </p>
+          <div class="mt-3 text-[11px] text-emerald-300/60">
+            Designed for educational reference and academic study.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-emerald-900/60 flex flex-wrap items-center justify-between text-xs text-emerald-200/60 gap-4">
+        <div>
+          © 2024-2026 AyurMedica • Ministry of AYUSH & NCISM Aligned BAMS Resource Portal
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Student First</span>
+          <span>•</span>
+          <span>Accessible Offline</span>
+          <span>•</span>
+          <span>Print Friendly</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data Scripts -->
+  <script src="js/data/syllabusData.js"></script>
+  <script src="js/data/practicalsData.js"></script>
+  <script src="js/data/pyqsData.js"></script>
+  <script src="js/data/summariesData.js"></script>
+  <script src="js/data/demoVideosData.js"></script>
+  <script src="js/data/flashcardsData.js"></script>
+  <script src="js/data/dictionaryData.js"></script>
+  <script src="js/data/chapterRepository.js"></script>
+
+  <!-- App Component Scripts -->
+  <script src="js/components/practicalViewer.js"></script>
+  <script src="js/components/pyqViewer.js"></script>
+  <script src="js/components/demoPlayer.js"></script>
+  <script src="js/components/summaryViewer.js"></script>
+  <script src="js/components/syllabusViewer.js"></script>
+  <script src="js/components/flashcards.js"></script>
+  <script src="js/components/dictionary.js"></script>
+
+  <!-- Core Controller Bootstrap -->
+  <script src="js/app.js"></script>
+</body>
+</html>
